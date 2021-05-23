@@ -20,6 +20,9 @@
         <activity
             android:name=".AddTodo">
         </activity>
+        <activity
+            android:name=".DetailTodo">
+        </activity>
     </application>
 
 </manifest>
