@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
     lateinit var mRowdate: ArrayList<RowData>
 
     //データベース
-    private val dbName: String = "ToDoList"
+    private val dbName: String = "ToDoListDB"
     private val dbVersion: Int = 1
 
     //行データ
