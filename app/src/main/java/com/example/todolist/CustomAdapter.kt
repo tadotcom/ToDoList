@@ -7,7 +7,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomAdapter (private val rowDataList: ArrayList<RowData>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+interface AddRowdataListener {
+    fun buttonTapped(animal: RowData)
+}
+
+class CustomAdapter (private val rowDataList: ArrayList<RowData>, private val listener: AddRowdataListener): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
 
     // Viewの初期化
@@ -32,10 +36,14 @@ class CustomAdapter (private val rowDataList: ArrayList<RowData>): RecyclerView.
 
     // Viewの設定
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val animal = rowDataList[position]
+        val mRowData = rowDataList[position]
 
-        viewHolder.title.text = animal.title
-        viewHolder.detail.text = animal.detail
+        viewHolder.title.text = mRowData.title
+        viewHolder.detail.text = mRowData.detail
+
+        viewHolder.title.setOnClickListener {
+            listener.buttonTapped(mRowData)
+        }
     }
 
     // 表示数を返す
