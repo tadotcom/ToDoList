@@ -10,9 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), AddRowdataListener {
 
+    //リサイクルビュー
     lateinit var mAdapter: CustomAdapter
     lateinit var mRowdate: ArrayList<RowData>
 
+    //データベース
+    private val dbName: String = "ToDoList"
+    private val dbVersion: Int = 1
+
+    //行データ
     private var arrayListTitle: ArrayList<String> = arrayListOf()
     private var arrayListDetail: ArrayList<String> = arrayListOf()
 
@@ -21,6 +27,9 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //DBにアクセス
+        selectData()
 
         //データの有無のチェックを行う
         if (arrayListTitle.isEmpty()) {
@@ -45,6 +54,29 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
 
             recyclerView.adapter = mAdapter
 
+        }
+    }
+
+    private fun selectData() {
+        try {
+            arrayListTitle.clear();arrayListDetail.clear();
+
+            val dbHelper = ToDoDBHelper(applicationContext, dbName, null, dbVersion)
+            val database = dbHelper.readableDatabase
+
+            val sql = "select name, type from SampleTable"
+
+            val cursor = database.rawQuery(sql, null)
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                while (!cursor.isAfterLast) {
+                    //arrayListId.add(cursor.getString(0))
+                    arrayListTitle.add(cursor.getString(0))
+                    arrayListDetail.add(cursor.getString(1))
+                    cursor.moveToNext()
+                }
+            }
+        }catch(exception: Exception) {
         }
     }
 
