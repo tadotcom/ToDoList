@@ -8,31 +8,53 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddRowdataListener {
 
     lateinit var mAdapter: CustomAdapter
     lateinit var mRowdate: ArrayList<RowData>
+
+    private var arrayListTitle: ArrayList<String> = arrayListOf()
+    private var arrayListDetail: ArrayList<String> = arrayListOf()
+
     var addData = RowData("", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // RecyclerViewの取得
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        //データの有無のチェックを行う
+        if (arrayListTitle.isEmpty()) {
 
-        // LayoutManagerの設定
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        } else {
+            // RecyclerViewの取得
+            val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
-        // データの作成
-        val data1 = RowData("1つめのたくす", "あああああ")
-//        val data2 = RowData("2つめのたくす", "あああああ")
-//        val data3 = RowData("3つめのたくす", "あああああ")
-        mRowdate = arrayListOf(data1)
+            // LayoutManagerの設定
+            recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // CustomAdapterの生成と設定
-        mAdapter = CustomAdapter(mRowdate)
-        recyclerView.adapter = mAdapter
+            mRowdate = arrayListOf(addData)
+            mRowdate.clear()
+            for (i in 0..arrayListTitle.size - 1) {
+                addData = RowData(arrayListTitle.get(i), arrayListDetail.get(i))
+                mRowdate.add(addData)
+
+            }
+
+            // CustomAdapterの生成と設定
+            mAdapter = CustomAdapter(mRowdate, this)
+
+            recyclerView.adapter = mAdapter
+
+        }
+    }
+
+    /**
+     * ボタンタップイベント
+     */
+    override fun buttonTapped(row: RowData) {
+        val intent = Intent(this, DetailTodo::class.java)
+        intent.putExtra("VALUE", row.title + "-" + row.detail)
+        startActivity(intent)
     }
 
     /**
