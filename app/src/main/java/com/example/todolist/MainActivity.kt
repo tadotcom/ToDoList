@@ -3,6 +3,7 @@ package com.example.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
 
         //データの有無のチェックを行う
         if (arrayListTitle.isEmpty()) {
-
         } else {
             // RecyclerViewの取得
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
             val dbHelper = ToDoDBHelper(applicationContext, dbName, null, dbVersion)
             val database = dbHelper.readableDatabase
 
-            val sql = "select name, type from SampleTable"
+            val sql = "select title, detail from ToDoListTable"
 
             val cursor = database.rawQuery(sql, null)
             if (cursor.count > 0) {
