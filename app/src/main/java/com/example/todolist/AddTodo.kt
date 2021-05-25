@@ -48,7 +48,7 @@ class AddTodo : AppCompatActivity() {
             val randam = Random(5).toString()
 
             val values = ContentValues()
-            values.put("id", randam)
+            //values.put("id", randam)
             values.put("title", title)
             values.put("detail", detail)
 

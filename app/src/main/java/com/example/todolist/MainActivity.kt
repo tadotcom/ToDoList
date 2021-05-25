@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
 
         //データの有無のチェックを行う
         if (arrayListTitle.isEmpty()) {
+
         } else {
+            Log.d("AAAAAA", "")
             // RecyclerViewの取得
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 

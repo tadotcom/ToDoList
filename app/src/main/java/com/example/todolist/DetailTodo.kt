@@ -31,6 +31,9 @@ class DetailTodo : AppCompatActivity() {
         var splitTitle: String = detailRowData.substring(0, split)
         var splitDetail: String = detailRowData.substring(split + 1, splitLength)
 
+        titleTextView.setText(splitTitle)
+        detailTextView.setText(splitDetail)
+
         //キャンセルボタン押下
         val cancelButton: Button = findViewById(R.id.cancelBtn)
         cancelButton.setOnClickListener {
