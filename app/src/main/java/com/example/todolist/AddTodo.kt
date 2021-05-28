@@ -19,28 +19,14 @@ class AddTodo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_todo)
 
-        val titleEdit: EditText = findViewById(R.id.titleEdit)
-        val detailEdit: EditText = findViewById(R.id.detailEdit)
-
-        //キャンセルボタン押下
-        val cancelButton: Button = findViewById(R.id.cancelBtn)
-        cancelButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("VALUE", "")
-            startActivity(intent)
-        }
-
-        //リストに登録するボタンを押下
-        val registerButton: Button = findViewById(R.id.registerBtn)
-        registerButton.setOnClickListener {
-            insertData(titleEdit.text.toString(), detailEdit.text.toString())
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("VALUE", "")
-            startActivity(intent)
-        }
+        //フラグメント
+        val addTodoFragment = AddTodoFragment()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_add, addTodoFragment)
+        fragmentTransaction.commit()
     }
 
-    private fun insertData(title: String, detail: String) {
+    fun insertData(title: String, detail: String) {
         try {
             val dbHelper = ToDoDBHelper(applicationContext, dbName, null, dbVersion)
             val database = dbHelper.writableDatabase

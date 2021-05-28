@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.security.AccessController.getContext
 
 class MainActivity : AppCompatActivity(), AddRowdataListener {
 
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add -> {
-                val intent = Intent(this, AddTodo::class.java)
+                val intent = Intent(applicationContext, AddTodo::class.java)
                 intent.putExtra("VALUE", "")
                 startActivity(intent)
                 true
