@@ -54,22 +54,5 @@ class AddTodoFragment : Fragment() {
             intent.putExtra("VALUE", "")
             startActivity(intent)
         }
-
-//        //キャンセルボタン押下
-//        val cancelButton: Button = findViewById(R.id.cancelBtn)
-//        cancelButton.setOnClickListener {
-//            val intent = Intent(context, MainActivity::class.java)
-//            intent.putExtra("VALUE", "")
-//            startActivity(intent)
-//        }
-
-//        //リストに登録するボタンを押下
-//        val registerButton: Button = findViewById(R.id.registerBtn)
-//        registerButton.setOnClickListener {
-//            mAddTodo.insertData(titleEdit.text.toString(), detailEdit.text.toString())
-//            val intent = Intent(context, MainActivity::class.java)
-//            intent.putExtra("VALUE", "")
-//            startActivity(intent)
-//        }
     }
 }
