@@ -35,11 +35,11 @@ class AddTodoFragment : Fragment() {
         //AddTodoを生成、DBへのアクセスはAddTodoで行う
         val mAddTodo = AddTodo()
 
-        val titleEdit: EditText = view.findViewById(R.id.titleEdit)
-        val detailEdit: EditText = view.findViewById(R.id.detailEdit)
+        val titleEdit = view.findViewById<EditText>(R.id.titleEdit)
+        val detailEdit = view.findViewById<EditText>(R.id.detailEdit)
 
         //キャンセルボタン押下
-        val cancelButton: Button = view.findViewById(R.id.cancelBtn)
+        val cancelButton = view.findViewById<Button>(R.id.cancelBtn)
         cancelButton.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("VALUE", "")
@@ -47,12 +47,29 @@ class AddTodoFragment : Fragment() {
         }
 
         //リストに登録するボタンを押下
-        val registerButton: Button = view.findViewById(R.id.registerBtn)
+        val registerButton = view.findViewById<Button>(R.id.registerBtn)
         registerButton.setOnClickListener {
             mAddTodo.insertData(titleEdit.text.toString(), detailEdit.text.toString())
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("VALUE", "")
             startActivity(intent)
         }
+
+//        //キャンセルボタン押下
+//        val cancelButton: Button = findViewById(R.id.cancelBtn)
+//        cancelButton.setOnClickListener {
+//            val intent = Intent(context, MainActivity::class.java)
+//            intent.putExtra("VALUE", "")
+//            startActivity(intent)
+//        }
+
+//        //リストに登録するボタンを押下
+//        val registerButton: Button = findViewById(R.id.registerBtn)
+//        registerButton.setOnClickListener {
+//            mAddTodo.insertData(titleEdit.text.toString(), detailEdit.text.toString())
+//            val intent = Intent(context, MainActivity::class.java)
+//            intent.putExtra("VALUE", "")
+//            startActivity(intent)
+//        }
     }
 }
