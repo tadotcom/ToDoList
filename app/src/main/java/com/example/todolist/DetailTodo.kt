@@ -52,7 +52,7 @@ class DetailTodo : AppCompatActivity() {
         }
     }
 
-    private fun deleteData(whereId: String) {
+    fun deleteData(whereId: String) {
         try {
             val dbHelper = ToDoDBHelper(applicationContext, dbName, null, dbVersion);
             val database = dbHelper.writableDatabase
