@@ -1,6 +1,9 @@
 package com.example.todolist
 
+import android.app.Activity
+import android.app.Application
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +17,8 @@ class AddTodo : AppCompatActivity() {
     private val dbName: String = "ToDoListDB"
     private val tableName: String = "ToDoListTable"
     private val dbVersion: Int = 1
+    var mApplication: Application ? = null
+    val aa = Global()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,8 @@ class AddTodo : AppCompatActivity() {
 
     fun insertData(title: String, detail: String) {
         try {
-            val dbHelper = ToDoDBHelper(applicationContext, dbName, null, dbVersion)
+
+            val dbHelper = ToDoDBHelper(aa.applicationContext, dbName, null, dbVersion)
             val database = dbHelper.writableDatabase
 
             val randam = Random(5).toString()
