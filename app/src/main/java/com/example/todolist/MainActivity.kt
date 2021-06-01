@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
         if (arrayListTitle.isEmpty()) {
 
         } else {
-            Log.d("AAAAAA", "")
             // RecyclerViewの取得
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
