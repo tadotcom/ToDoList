@@ -11,8 +11,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
@@ -33,11 +35,12 @@ class AddTodoFragment : Fragment() {
     private val tableName: String = "ToDoListTable"
     private val dbVersion: Int = 1
     var mContext: Context? = null
-    var titleValidate:Int? = null
-    var detailValidate:Int? = null
+    var titleEdit: EditText? = null
+    var titleValidate: Int? = null
+    var detailValidate: Int? = null
 
     //ViewModelのインスタンスを生成
-    private val viewModel : AddTodoViewModel by viewModels()
+    private val viewModel: AddTodoViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,6 +61,26 @@ class AddTodoFragment : Fragment() {
         var titleEdit = view.findViewById<EditText>(R.id.titleEdit)
         var detailEdit = view.findViewById<EditText>(R.id.detailEdit)
 
+        //タイトルのEditTextに”必須項目です”と表示されているときにフォーカスを当てると削除する
+        titleEdit.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                if (titleEdit.text.toString() == "必須項目です") {
+                    titleEdit.setText("")
+                    Log.d("DEBUG", titleEdit.text.toString())
+                }
+            }
+        }
+
+        //詳細のEditTextに”必須項目です”と表示されているときにフォーカスを当てると削除する
+        detailEdit.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                if (detailEdit.text.toString() == "必須項目です") {
+                    detailEdit.setText("")
+                    Log.d("DEBUG", detailEdit.text.toString())
+                }
+            }
+        }
+
         //キャンセルボタン押下
         val cancelButton = view.findViewById<Button>(R.id.cancelBtn)
         cancelButton.setOnClickListener {
@@ -74,14 +97,14 @@ class AddTodoFragment : Fragment() {
             detailValidate = viewModel.validateEditText(detailEdit.text.toString())
 
             //タスクのタイトルが空のとき
-            if(titleValidate == 0) {
+            if (titleValidate == 0) {
                 titleEdit.setText("必須項目です")
                 titleEdit.setTextColor(Color.parseColor("red"))
                 return@setOnClickListener
             }
 
             //タスクの詳細が空のとき
-            if(detailValidate == 0) {
+            if (detailValidate == 0) {
                 detailEdit.setText("必須項目です")
                 detailEdit.setTextColor(Color.parseColor("red"))
                 return@setOnClickListener
@@ -97,7 +120,7 @@ class AddTodoFragment : Fragment() {
 
                 database.insertOrThrow(tableName, null, values)
 
-            }catch(exception: Exception) {
+            } catch (exception: Exception) {
                 Log.e("exception", exception.toString())
             }
             val intent = Intent(context, MainActivity::class.java)
