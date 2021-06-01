@@ -2,15 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
 <data>
-
     <variable
         name="viewModel"
         type="com.example.todolist.AddTodoViewModel" />
 </data>
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="タイトル"
+            android:text="@string/title"
             android:textSize="30dp"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
@@ -32,14 +27,14 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/partsdesign"
-            android:hint="予定のタイトルを入力(10文字以内)"
+            android:hint="@string/titleHint"
             android:text="@={viewModel.title}"
             android:maxLength="10"
             android:maxLines="5"
             android:minLines="2" />
 
         <TextView
-            android:text="詳細"
+            android:text="@string/detail"
             android:textSize="30dp"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -53,7 +48,7 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/partsdesign"
             android:gravity="top"
-            android:hint="予定の詳細を入力(200文字以内)"
+            android:hint="@string/detailHint"
             android:text="@={viewModel.detail}"
             android:maxLength="200"
             android:maxLines="10"
@@ -73,7 +68,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#87cefa"
                 android:drawableLeft="@drawable/cancel_icon"
-                android:text="キャンセル"
+                android:text="@string/cancel"
                 android:textColor="@color/black" />
 
             <Button
@@ -83,7 +78,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#90ee90"
                 android:drawableLeft="@drawable/registration_icon"
-                android:text="リストに登録"
+                android:text="@string/register"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -93,17 +88,15 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="タイトル"
+            android:text="@string/title"
             android:textSize="30dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="詳細"
+            android:text="@string/delete"
             android:textSize="30dp" />
 
     </LinearLayout>
-
-<!--</LinearLayout>-->
 </layout>

@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">ToDoList</string>
+    <string name="app_name">やることりすと</string>
+    <string name="title">タイトル</string>
+    <string name="titleHint">予定のタイトルを入力(10文字以内)</string>
+    <string name="detail">詳細</string>
+    <string name="detailHint">予定の詳細を入力(200文字以内)</string>
+    <string name="cancel">キャンセル</string>
+    <string name="register">登録</string>
+    <string name="delete">リストから削除</string>
 </resources>
