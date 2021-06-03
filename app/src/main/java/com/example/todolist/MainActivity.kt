@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
         selectData()
 
         //データの有無のチェックを行う
-        if (arrayListTitle.isEmpty()) {
-
-        } else {
+        if (!arrayListTitle.isEmpty()) {
             // RecyclerViewの取得
             val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
@@ -73,7 +71,6 @@ class MainActivity : AppCompatActivity(), AddRowdataListener {
             if (cursor.count > 0) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    //arrayListId.add(cursor.getString(0))
                     arrayListTitle.add(cursor.getString(0))
                     arrayListDetail.add(cursor.getString(1))
                     cursor.moveToNext()
